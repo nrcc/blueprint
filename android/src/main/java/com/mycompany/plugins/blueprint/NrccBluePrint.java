@@ -26,8 +26,8 @@ import java.util.UUID;
 public class NrccBluePrint {
 
     public String echo(String value) {
-        Log.i("Echo", value);
-        return value;
+        Log.i("Echo android", value);
+        return "android "+value;
     }
 
     BluetoothAdapter mBluetoothAdapter;

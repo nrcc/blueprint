@@ -4,7 +4,8 @@ import type { BluetoothDevice, NrccBluePrintPlugin } from './definitions';
 
 export class NrccBluePrintWeb extends WebPlugin implements NrccBluePrintPlugin {
   async echo(options: { value: string }): Promise<{ value: string }> {
-    console.log('ECHO', options);
+    console.log('ECHO web', options);
+    options.value = "web" + options.value;
     return options;
   }
 
