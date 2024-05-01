@@ -14,8 +14,8 @@ public class NrccBluePrintPlugin extends Plugin {
 
     @PluginMethod
     public void echo(PluginCall call) {
+       
         String value = call.getString("value");
-
         JSObject ret = new JSObject();
         ret.put("value", implementation.echo(value));
         call.resolve(ret);
@@ -43,11 +43,17 @@ public class NrccBluePrintPlugin extends Plugin {
         }
     }
 
+    /**
+     * 持续打印
+     * @param call
+     */
     @PluginMethod
     public void print(PluginCall call) {
         try {
-            String data = call.getString("data");
-            implementation.print(data);
+            var data = call.getString("data");
+            var address = call.getString("address");
+            var printType = call.getString("printType");
+            implementation.print(address,data,printType);
             call.resolve();
         } catch (RuntimeException e) {
             call.reject(e.getMessage(), e);
@@ -67,10 +73,11 @@ public class NrccBluePrintPlugin extends Plugin {
     @PluginMethod
     public void connectAndPrint(PluginCall call) throws InterruptedException {
         try {
-            String address = call.getString("address");
+            var data = call.getString("data");
+            var address = call.getString("address");
+            var printType = call.getString("printType");
             implementation.connect(getContext(), address);
-            String data = call.getString("data");
-            implementation.print(data);
+            implementation.print(address, data,printType);
             Thread.sleep(100);
             implementation.disconnect();
             call.resolve();

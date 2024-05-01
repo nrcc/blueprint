@@ -4,10 +4,10 @@ export interface NrccBluePrintPlugin {
   echo(options: { value: string }): Promise<{ value: string }>;
   list(): Promise<{ devices: BluetoothDevice[] }>;
   connect(options: { address: string }): Promise<void>;
-  print(options: { data: string }): Promise<void>;
+  print(options: { address: string, data: string, printType: string }): Promise<void>;
   disconnect(): Promise<void>;
 
-  connectAndPrint(options: { address: string, data: string }): Promise<void>;
+  connectAndPrint(options: { address: string, data: string, printType: string }): Promise<void>;
 }
 
 
